@@ -2,48 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Under Construction Game</title>
+<title>Coming Soon</title>
 <style>
     body {
-        margin: 0;
-        overflow: hidden;
-        background: #1e1e2f;
-        color: #fff;
-        text-align: center;
-        font-family: sans-serif;
-    }
-    #score {
-        position: absolute;
-        top: 10px;
-        left: 10px;
+        background: #000;
+        color: #0f0;
+        font-family: monospace;
         font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
-    .target {
-        position: absolute;
-        font-size: 40px;
-        cursor: pointer;
+    #text::after {
+        content: '|';
+        animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
     }
 </style>
 </head>
 <body>
-<div id="score">Score: 0</div>
+<div id="text"></div>
 <script>
-let score = 0;
-function spawnTarget() {
-    let target = document.createElement('div');
-    target.className = 'target';
-    target.textContent = '🚧';
-    target.style.top = Math.random() * window.innerHeight + 'px';
-    target.style.left = Math.random() * window.innerWidth + 'px';
-    target.onclick = function() {
-        score++;
-        document.getElementById('score').textContent = 'Score: ' + score;
-        this.remove();
-    };
-    document.body.appendChild(target);
-    setTimeout(() => target.remove(), 2000);
+let text = "We are building something amazing...";
+let i = 0;
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
 }
-setInterval(spawnTarget, 1000);
+typeWriter();
 </script>
 </body>
 </html>
