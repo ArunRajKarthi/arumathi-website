@@ -1,20 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Site Under Construction</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px;
-            background-color: #f4f4f4;
-        }
-        h1 { font-size: 48px; }
-        p { font-size: 20px; color: #555; }
-    </style>
+<meta charset="UTF-8">
+<title>Under Construction Game</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: #1e1e2f;
+        color: #fff;
+        text-align: center;
+        font-family: sans-serif;
+    }
+    #score {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+    }
+    .target {
+        position: absolute;
+        font-size: 40px;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
-    <h1>🚧 Site Under Construction 🚧</h1>
-    <p>We’ll be live soon. Stay tuned!</p>
+<div id="score">Score: 0</div>
+<script>
+let score = 0;
+function spawnTarget() {
+    let target = document.createElement('div');
+    target.className = 'target';
+    target.textContent = '🚧';
+    target.style.top = Math.random() * window.innerHeight + 'px';
+    target.style.left = Math.random() * window.innerWidth + 'px';
+    target.onclick = function() {
+        score++;
+        document.getElementById('score').textContent = 'Score: ' + score;
+        this.remove();
+    };
+    document.body.appendChild(target);
+    setTimeout(() => target.remove(), 2000);
+}
+setInterval(spawnTarget, 1000);
+</script>
 </body>
 </html>
